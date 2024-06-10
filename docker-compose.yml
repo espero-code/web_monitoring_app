@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # Service Laravel
+  laravel:
+    image: php:8.1-fpm
+    container_name: laravel
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - laravel_network
+
+  # Service MySQL
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: db_web_monitoring
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - laravel_network
+
+  # Service phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8080:80"
+    networks:
+      - laravel_network
+
+networks:
+  laravel_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local

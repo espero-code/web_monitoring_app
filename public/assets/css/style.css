@@ -1,0 +1,78 @@
+
+nav.navbar{
+    height: 80px;
+}
+nav.navbar * {
+    color: white !important;
+    text-shadow: 1px 2px 3px #090909;
+
+}
+
+.page-content {
+    height: calc(100vh - 80px);
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+
+
+a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+.status {
+    width: 20px;
+    height: 20px;
+    display: block;
+    border-radius: 50px;
+    margin: 0 auto;
+}
+
+.status-success {
+    background-color: green !important;
+}
+.status-danger {
+    background-color: red !important;
+}
+
+.col-md-6 > .table-zone{
+    max-height: calc(100vh - 300px);
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+table td span,
+table th,
+table td{
+    text-align: center;
+}
+
+
+footer{
+    height: 80px;
+    z-index: 9999;
+}
+.table-zone::-webkit-scrollbar {
+    width: 12px;
+}
+
+.table-zone::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.table-zone::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+}
+
+.table-zone::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Pour Firefox */
+.table-zone {
+    scrollbar-width: thin;
+    scrollbar-color:  var(--bs-primary) #f1f1f1;
+}
