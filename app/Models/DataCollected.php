@@ -11,11 +11,11 @@ class DataCollected extends Model
 
 	public function module()
 	{
-		
+
 		return $this->belongsTo(\App\Models\Module::class);
-	
+
 	}
 
 
-	protected $fillable = ['measured_value', 'running_time', 'data_count', 'running_status', 'module'];
+	protected $fillable = ['measured_value', 'running_time', 'data_count', 'running_status', 'module_id'];
 }

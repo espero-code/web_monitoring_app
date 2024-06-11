@@ -45,8 +45,9 @@ class HomeController extends BaseController
 
         // Récupérer les labels (temps) et les valeurs (valeurs calculées)
         $labels = $datas->pluck('created_at')->map(function ($date) {
-            return $date->format('Y-m-d H:i:s'); // Modifier le format si nécessaire
+            return $date->diffForHumans();
         });
+
         $values = $datas->pluck('measured_value');
 
         return view("home/index", [

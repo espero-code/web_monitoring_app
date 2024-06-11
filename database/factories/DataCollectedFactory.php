@@ -17,11 +17,11 @@ class DataCollectedFactory extends Factory
     {
         $createdAt = $this->faker->dateTimeBetween('-30 days');
         return [
+            'module_id' => Module::inRandomOrder()->first()->id,
             'measured_value' => $this->faker->randomFloat(2, 0, 100),
             'running_time' => $this->faker->randomFloat(2, 0, 10000),
             'running_status' => $this->faker->boolean,
             'data_count' => $this->faker->numberBetween(1, 1000),
-            'module_id' => Module::inRandomOrder()->first()->id,
             'created_at' => $createdAt,
             'updated_at' => $createdAt,
         ];

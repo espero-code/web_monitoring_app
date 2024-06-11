@@ -12,6 +12,6 @@ class DataCollectedSeeder extends Seeder
      */
     public function run(): void
     {
-        DataCollected::factory()->count(500)->create();
+        DataCollected::factory()->count(50)->create();
     }
 }
