@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
 Route::get('/module/{slug}', 'App\Http\Controllers\HomeController@index')->name('home.index');
+Route::get('/api/module', 'App\Http\Controllers\HomeController@get_module_datas')->name('home.get_module_datas');
+Route::get('/api/module/{slug}', 'App\Http\Controllers\HomeController@get_module_datas')->name('home.get_module_datas');
 
 
 

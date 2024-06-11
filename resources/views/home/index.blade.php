@@ -11,9 +11,8 @@
                     @foreach ($modules as $module)
                         <li class="module-item list-group-item border-0 {{ $module->slug == $slug ? 'active' : '' }}"
                             title="{{ $module->description }}">
-                            <a href="{{ route('home.index', ['slug' => $module->slug]) }}"
-                                data-bs-toggle="tooltip" data-bs-title="{{ $module->description }}"
-                                >{{ $module->name }}</a>
+                            <a href="{{ route('home.index', ['slug' => $module->slug]) }}" data-bs-toggle="tooltip"
+                                data-bs-title="{{ $module->description }}">{{ $module->name }}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -26,7 +25,7 @@
                     <div class="col-md-6">
                         <h2>Historique (données collectées)</h2>
                         <div class="mb-3">
-                            <strong>Type de mesure : {{$measuredType->name}} </strong>
+                            <strong>Type de mesure : {{ $measuredType->name }} </strong>
                         </div>
 
                         @include('partials/pagination')
@@ -35,11 +34,17 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col" > <a href="#" data-bs-toggle="tooltip" data-bs-title="Valeur calculée : ( {{$measuredType->name}} )">Valeur </a> </th>
-                                        <th scope="col" > <a href="#" data-bs-toggle="tooltip" data-bs-title="Temps de fonctionnement">Temps </a> </th>
-                                        <th scope="col" > <a href="#" data-bs-toggle="tooltip" data-bs-title="Statut de fonctionnement">Status </a> </th>
-                                        <th scope="col" > <a href="#" data-bs-toggle="tooltip" data-bs-title="Nombre de données">Quantité </a> </th>
-                                        <th scope="col" > <a href="#" data-bs-toggle="tooltip" data-bs-title="Collectée le">Depuis </a> </th>
+                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip"
+                                                data-bs-title="Valeur calculée : ( {{ $measuredType->name }} )">Valeur </a>
+                                        </th>
+                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip"
+                                                data-bs-title="Temps de fonctionnement">Temps </a> </th>
+                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip"
+                                                data-bs-title="Statut de fonctionnement">Status </a> </th>
+                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip"
+                                                data-bs-title="Nombre de données">Quantité </a> </th>
+                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip"
+                                                data-bs-title="Collectée le">Depuis </a> </th>
 
                                     </tr>
                                 </thead>
@@ -56,7 +61,8 @@
                                             <td>{{ $data->measured_value }}</td>
                                             <td>{{ $data->running_time }}</td>
                                             <td>
-                                                <a href="#" data-bs-toggle="tooltip" data-bs-title="{{ $data->running_status ? 'En cours' : 'Arrêté' }}">
+                                                <a href="#" data-bs-toggle="tooltip"
+                                                    data-bs-title="{{ $data->running_status ? 'En cours' : 'Arrêté' }}">
 
                                                     <span
                                                         class="status {{ $data->running_status ? 'status-success' : 'status-danger' }}">
@@ -74,7 +80,7 @@
 
                         </div>
                         <!-- Afficher les liens de pagination si nécessaire -->
-                       @include('partials/pagination')
+                        @include('partials/pagination')
                     </div>
                     <div class="col-md-6">
                         <h2>Graphique</h2>

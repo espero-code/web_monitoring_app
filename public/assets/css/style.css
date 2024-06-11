@@ -76,3 +76,21 @@ footer{
     scrollbar-width: thin;
     scrollbar-color:  var(--bs-primary) #f1f1f1;
 }
+
+#notification-container{
+    right: 50px;
+    max-height: 30vh;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: white;
+    padding: 10px;
+}
+.alert{
+
+}
+.alert
+{
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}

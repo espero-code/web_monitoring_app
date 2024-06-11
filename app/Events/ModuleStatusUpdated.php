@@ -29,13 +29,11 @@ class ModuleStatusUpdated implements ShouldBroadcast
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn(): array
+    public function broadcastOn() 
     {
-        return [
-            new Channel('module-status'),
-        ];
+        return new Channel('module-status');
     }
 
     public function broadcastWith()
