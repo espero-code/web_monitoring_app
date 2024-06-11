@@ -17,7 +17,7 @@ class HomeController extends BaseController
     public function index($slug = null)
     {
         // Définir la valeur par défaut
-        $defaultPerPage = 30;
+        $defaultPerPage = 5;
 
         // Récupérer la valeur de totalPerPage depuis la requête ou la session
         $totalPerPage = request()->get('totalPerPage', session('totalPerPage', $defaultPerPage));
@@ -39,7 +39,9 @@ class HomeController extends BaseController
         if ($module) {
             $datas = DataCollected::where('module_id', $module->id)
                 ->orderBy('created_at', 'desc')
-                ->paginate($totalPerPage);
+                ->paginate($totalPerPage)
+                ->onEachSide(2)
+                ;
         } else {
             $datas = collect(); // Créer une collection vide si aucun module n'est trouvé
         }

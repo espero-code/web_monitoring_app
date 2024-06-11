@@ -25,7 +25,10 @@ class ModuleStatusController extends BaseController
                 'created_at' => now(),
             ]);
 
+            $module->status = $status;
 
+            $module->save();
+            
             Log::info($data);
 
             // Diffuser l'événement

@@ -15,36 +15,43 @@
 </head>
 
 <body>
-    <header class="sticky-top shadow-lg">
-        <!-- Navbar Bootstrap -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="#">TrackApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Administration</a>
-                        </li>
-                        <!-- Ajoutez d'autres liens de navigation selon vos besoins -->
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link badge bg-primary" href="#">
-                                <i class="fa-solid fa-bell"></i>
-                                <!-- Optionally, you can add a badge for the number of notifications -->
-                                <span class="badge bg-danger">3</span>
-                            </a>
-                        </li>
-                    </ul>
-
+    <header class="sticky-top d-flex p-2 shadow-lg navbar-light bg-primary jsb">
+        <h2 class="pr-2">
+            <a href="{{ route('home') }}">
+                TrackApp
+            </a>
+        </h2>
+        <div class="d-flex gap-5 aic">
+            <a href="{{ route('admin.modules.index') }}">
+                <i class="fas fa-user-circle"></i>
+            </a>
+            <div class="dropdown">
+                <div class="position-relative dropdown-toggle d-none" id="notification-icon" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge bg-danger position-absolute bottom-0">0</span>
                 </div>
+                <ul class="dropdown-menu" id="notification-list">
+                </ul>
             </div>
-        </nav>
+        </div>
     </header>
+    {{-- <div class="banner navbar-light bg-primary text-light shadow-lg">
+        <div class="container">
+            <div class="jumbotron py-5">
+                <h1 class="display-4">Bienvenue sur notre site de suivi de performances.</h1>
+                <hr class="my-4">
+                <p class="lead">
+                    Découvrez les performances, le fonctionnement et la disponibilité de vos différents appareils
+                    connectés.
+                </p>
+                <p class="lead">
+                    Analysez les données pour mieux optimiser leur utilisation.
+                </p>
+
+            </div>
+        </div>
+    </div> --}}
 
     <main class="container-fluid px-0">
         <div class="page-content">
@@ -52,8 +59,7 @@
         </div>
     </main>
 
-    <div id="notification-container" class="position-fixed bottom-0 shadow-lg rounded-2">
-    </div>
+
 
     {{-- <footer class="footer mt-auto py-3 bg-primary position-fixed bottom-0 w-100 text-light shadow-lg">
         <div class="container">

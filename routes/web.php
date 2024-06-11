@@ -13,145 +13,94 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
-Route::get('/module/{slug}', 'App\Http\Controllers\HomeController@index')->name('home.index');
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
+Route::get('/module/{slug}', 'App\Http\Controllers\HomeController@index')->name('module_by_slug');
 Route::get('/api/module', 'App\Http\Controllers\HomeController@get_module_datas')->name('home.get_module_datas');
 Route::get('/api/module/{slug}', 'App\Http\Controllers\HomeController@get_module_datas')->name('home.get_module_datas');
 
 
 
-Route::prefix('admin')->name('admin.')->group(function(){
 
-    //Get Categories datas
-    Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('category.index');
 
-    //Show Category by Id
-    Route::get('/categories/show/{id}', 'App\Http\Controllers\CategoryController@show')->name('category.show');
-
-    //Get Categories by Id
-    Route::get('/categories/create', 'App\Http\Controllers\CategoryController@create')->name('category.create');
-
-    //Edit Category by Id
-    Route::get('/categories/edit/{id}', 'App\Http\Controllers\CategoryController@edit')->name('category.edit');
-
-    //Save new Category
-    Route::post('/categories/store', 'App\Http\Controllers\CategoryController@store')->name('category.store');
-
-    //Update One Category
-    Route::put('/categories/update/{category}', 'App\Http\Controllers\CategoryController@update')->name('category.update');
-
-    //Update One Category Speedly
-    Route::put('/categories/speed/{category}', 'App\Http\Controllers\CategoryController@updateSpeed')->name('category.update.speed');
-
-    //Delete Category
-    Route::delete('/categories/delete/{category}', 'App\Http\Controllers\CategoryController@delete')->name('category.delete');
-
-});
-Route::prefix('admin')->name('admin.')->group(function(){
-
-    //Get Data datas
-    Route::get('/data', 'App\Http\Controllers\DataController@index')->name('data.index');
-
-    //Show Data by Id
-    Route::get('/data/show/{id}', 'App\Http\Controllers\DataController@show')->name('data.show');
-
-    //Get Data by Id
-    Route::get('/data/create', 'App\Http\Controllers\DataController@create')->name('data.create');
-
-    //Edit Data by Id
-    Route::get('/data/edit/{id}', 'App\Http\Controllers\DataController@edit')->name('data.edit');
-
-    //Save new Data
-    Route::post('/data/store', 'App\Http\Controllers\DataController@store')->name('data.store');
-
-    //Update One Data
-    Route::put('/data/update/{data}', 'App\Http\Controllers\DataController@update')->name('data.update');
-
-    //Update One Data Speedly
-    Route::put('/data/speed/{data}', 'App\Http\Controllers\DataController@updateSpeed')->name('data.update.speed');
-
-    //Delete Data
-    Route::delete('/data/delete/{data}', 'App\Http\Controllers\DataController@delete')->name('data.delete');
-
-});
 Route::prefix('admin')->name('admin.')->group(function(){
 
     //Get Modules datas
-    Route::get('/modules', 'App\Http\Controllers\ModuleController@index')->name('module.index');
+    Route::get('/modules', 'App\Http\Controllers\ModuleController@index')->name('modules.index');
 
     //Show Module by Id
-    Route::get('/modules/show/{id}', 'App\Http\Controllers\ModuleController@show')->name('module.show');
+    Route::get('/modules/show/{id}', 'App\Http\Controllers\ModuleController@show')->name('modules.show');
 
     //Get Modules by Id
-    Route::get('/modules/create', 'App\Http\Controllers\ModuleController@create')->name('module.create');
+    Route::get('/modules/create', 'App\Http\Controllers\ModuleController@create')->name('modules.create');
 
     //Edit Module by Id
-    Route::get('/modules/edit/{id}', 'App\Http\Controllers\ModuleController@edit')->name('module.edit');
+    Route::get('/modules/edit/{id}', 'App\Http\Controllers\ModuleController@edit')->name('modules.edit');
 
     //Save new Module
-    Route::post('/modules/store', 'App\Http\Controllers\ModuleController@store')->name('module.store');
+    Route::post('/modules/store', 'App\Http\Controllers\ModuleController@store')->name('modules.store');
 
     //Update One Module
-    Route::put('/modules/update/{module}', 'App\Http\Controllers\ModuleController@update')->name('module.update');
+    Route::put('/modules/update/{module}', 'App\Http\Controllers\ModuleController@update')->name('modules.update');
 
     //Update One Module Speedly
-    Route::put('/modules/speed/{module}', 'App\Http\Controllers\ModuleController@updateSpeed')->name('module.update.speed');
+    Route::put('/modules/speed/{module}', 'App\Http\Controllers\ModuleController@updateSpeed')->name('modules.update.speed');
 
     //Delete Module
-    Route::delete('/modules/delete/{module}', 'App\Http\Controllers\ModuleController@delete')->name('module.delete');
+    Route::delete('/modules/delete/{module}', 'App\Http\Controllers\ModuleController@delete')->name('modules.delete');
+
+});
+
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    //Get Measured_types datas
+    Route::get('/measured_types', 'App\Http\Controllers\MeasuredTypeController@index')->name('measured_types.index');
+
+    //Show Measured_type by Id
+    Route::get('/measured_types/show/{id}', 'App\Http\Controllers\MeasuredTypeController@show')->name('measured_types.show');
+
+    //Get Measured_types by Id
+    Route::get('/measured_types/create', 'App\Http\Controllers\MeasuredTypeController@create')->name('measured_types.create');
+
+    //Edit Measured_type by Id
+    Route::get('/measured_types/edit/{id}', 'App\Http\Controllers\MeasuredTypeController@edit')->name('measured_types.edit');
+
+    //Save new Measured_type
+    Route::post('/measured_types/store', 'App\Http\Controllers\MeasuredTypeController@store')->name('measured_types.store');
+
+    //Update One Measured_type
+    Route::put('/measured_types/update/{measured_types}', 'App\Http\Controllers\MeasuredTypeController@update')->name('measured_types.update');
+
+    //Update One Measured_type Speedly
+    Route::put('/measured_types/speed/{measured_types}', 'App\Http\Controllers\MeasuredTypeController@updateSpeed')->name('measured_types.update.speed');
+
+    //Delete Measured_type
+    Route::delete('/measured_types/delete/{measured_types}', 'App\Http\Controllers\MeasuredTypeController@delete')->name('measured_types.delete');
 
 });
 Route::prefix('admin')->name('admin.')->group(function(){
 
-    //Get Types datas
-    Route::get('/types', 'App\Http\Controllers\TypeController@index')->name('type.index');
+    //Get DataCollecteds datas
+    Route::get('/data_collecteds', 'App\Http\Controllers\DataCollectedController@index')->name('data_collecteds.index');
 
-    //Show Type by Id
-    Route::get('/types/show/{id}', 'App\Http\Controllers\TypeController@show')->name('type.show');
+    //Show DataCollected by Id
+    Route::get('/data_collecteds/show/{id}', 'App\Http\Controllers\DataCollectedController@show')->name('data_collecteds.show');
 
-    //Get Types by Id
-    Route::get('/types/create', 'App\Http\Controllers\TypeController@create')->name('type.create');
+    //Get DataCollecteds by Id
+    Route::get('/data_collecteds/create', 'App\Http\Controllers\DataCollectedController@create')->name('data_collecteds.create');
 
-    //Edit Type by Id
-    Route::get('/types/edit/{id}', 'App\Http\Controllers\TypeController@edit')->name('type.edit');
+    //Edit DataCollected by Id
+    Route::get('/data_collecteds/edit/{id}', 'App\Http\Controllers\DataCollectedController@edit')->name('data_collecteds.edit');
 
-    //Save new Type
-    Route::post('/types/store', 'App\Http\Controllers\TypeController@store')->name('type.store');
+    //Save new DataCollected
+    Route::post('/data_collecteds/store', 'App\Http\Controllers\DataCollectedController@store')->name('data_collecteds.store');
 
-    //Update One Type
-    Route::put('/types/update/{type}', 'App\Http\Controllers\TypeController@update')->name('type.update');
+    //Update One DataCollected
+    Route::put('/data_collecteds/update/{data_collecteds}', 'App\Http\Controllers\DataCollectedController@update')->name('data_collecteds.update');
 
-    //Update One Type Speedly
-    Route::put('/types/speed/{type}', 'App\Http\Controllers\TypeController@updateSpeed')->name('type.update.speed');
+    //Update One DataCollected Speedly
+    Route::put('/data_collecteds/speed/{data_collecteds}', 'App\Http\Controllers\DataCollectedController@updateSpeed')->name('data_collecteds.update.speed');
 
-    //Delete Type
-    Route::delete('/types/delete/{type}', 'App\Http\Controllers\TypeController@delete')->name('type.delete');
-
-});
-Route::prefix('admin')->name('admin.')->group(function(){
-
-    //Get Users datas
-    Route::get('/users', 'App\Http\Controllers\UserController@index')->name('user.index');
-
-    //Show User by Id
-    Route::get('/users/show/{id}', 'App\Http\Controllers\UserController@show')->name('user.show');
-
-    //Get Users by Id
-    Route::get('/users/create', 'App\Http\Controllers\UserController@create')->name('user.create');
-
-    //Edit User by Id
-    Route::get('/users/edit/{id}', 'App\Http\Controllers\UserController@edit')->name('user.edit');
-
-    //Save new User
-    Route::post('/users/store', 'App\Http\Controllers\UserController@store')->name('user.store');
-
-    //Update One User
-    Route::put('/users/update/{user}', 'App\Http\Controllers\UserController@update')->name('user.update');
-
-    //Update One User Speedly
-    Route::put('/users/speed/{user}', 'App\Http\Controllers\UserController@updateSpeed')->name('user.update.speed');
-
-    //Delete User
-    Route::delete('/users/delete/{user}', 'App\Http\Controllers\UserController@delete')->name('user.delete');
+    //Delete DataCollected
+    Route::delete('/data_collecteds/delete/{data_collecteds}', 'App\Http\Controllers\DataCollectedController@delete')->name('data_collecteds.delete');
 
 });

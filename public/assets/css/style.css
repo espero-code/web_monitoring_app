@@ -1,20 +1,65 @@
+body {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-nav.navbar{
+header {
     height: 80px;
 }
-nav.navbar * {
-    color: white !important;
-    text-shadow: 1px 2px 3px #090909;
 
+header {
+    color: white !important;
+    display: flex;
+    align-items: center;
+
+}
+
+header h2 {
+    text-shadow: 1px 2px 3px #090909;
 }
 
 .page-content {
-    height: calc(100vh - 80px);
+    overflow: hidden;
+    /* height: calc(100vh - 80px);
+    overflow-y: auto; */
+}
+
+.flex {
+    display: flex;
+}
+
+.jcc {
+    justify-content: center;
+}
+
+.jsb {
+    justify-content: space-between;
+}
+
+.aic {
+    align-items: center;
+}
+.jca{
+    justify-content: space-around;
+}
+
+#notification-icon {
+    width: 100px;
+}
+
+header i {
+    font-size: 2rem;
+}
+#notification-list{
+    max-height: 30vh;
+    width: 300px;
     overflow: hidden;
     overflow-y: auto;
 }
 
-
+#notification-icon .badge {
+    left: 20px;
+}
 
 a {
     color: inherit !important;
@@ -24,7 +69,7 @@ a {
 .status {
     width: 20px;
     height: 20px;
-    display: block;
+    display: inline-block;
     border-radius: 50px;
     margin: 0 auto;
 }
@@ -32,11 +77,12 @@ a {
 .status-success {
     background-color: green !important;
 }
+
 .status-danger {
     background-color: red !important;
 }
 
-.col-md-6 > .table-zone{
+.col-md-6>.table-zone {
     max-height: calc(100vh - 300px);
     overflow: hidden;
     overflow-y: auto;
@@ -44,15 +90,16 @@ a {
 
 table td span,
 table th,
-table td{
+table td {
     text-align: center;
 }
 
 
-footer{
+footer {
     height: 80px;
     z-index: 9999;
 }
+
 .table-zone::-webkit-scrollbar {
     width: 12px;
 }
@@ -74,10 +121,10 @@ footer{
 /* Pour Firefox */
 .table-zone {
     scrollbar-width: thin;
-    scrollbar-color:  var(--bs-primary) #f1f1f1;
+    scrollbar-color: var(--bs-primary) #f1f1f1;
 }
 
-#notification-container{
+#notification-container {
     right: 50px;
     max-height: 30vh;
     overflow: hidden;
@@ -85,11 +132,10 @@ footer{
     background-color: white;
     padding: 10px;
 }
-.alert{
 
-}
-.alert
-{
+.alert {}
+
+.alert {
     width: 300px;
     display: flex;
     justify-content: space-between;

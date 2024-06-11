@@ -11,7 +11,7 @@
                     @foreach ($modules as $module)
                         <li class="module-item list-group-item border-0 {{ $module->slug == $slug ? 'active' : '' }}"
                             title="{{ $module->description }}">
-                            <a href="{{ route('home.index', ['slug' => $module->slug]) }}" data-bs-toggle="tooltip"
+                            <a href="{{ route('module_by_slug', ['slug' => $module->slug]) }}" data-bs-toggle="tooltip"
                                 data-bs-title="{{ $module->description }}">{{ $module->name }}</a>
                         </li>
                     @endforeach
