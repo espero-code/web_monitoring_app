@@ -1,3 +1,34 @@
+# TrackApp - Application de Monitoring des Performances des Modules IoT
+
+TrackApp est une application web développée avec le framework Laravel, conçue pour collecter en temps réel les performances des modules IoT connectés. Cette application permet de surveiller l'état de fonctionnement des modules, de visualiser les données collectées sous forme de graphiques et de recevoir des notifications en cas de dysfonctionnement.
+
+## Rapport de Réalisation
+
+### Création de la Base de Données
+
+Une base de données a été créée pour répertorier les modules IoT, leurs détails et l'historique de fonctionnement. Les tables nécessaires ont été conçues pour stocker les informations pertinentes, telles que les modules, les types de mesure et les données collectées.
+
+### Formulaire d'Inscription des Modules
+
+Un formulaire a été mis en place pour permettre l'inscription de nouveaux modules dans l'application. Ce formulaire recueille les informations nécessaires sur les modules, telles que leur nom, leur emplacement, etc., et les enregistre dans la base de données.
+
+### Page de Visualisation de l'État de Fonctionnement des Modules
+
+Une page de visualisation a été développée pour afficher l'état de fonctionnement des modules. Cette page présente des informations telles que la valeur mesurée actuelle, la durée de fonctionnement, le nombre de données envoyées et l'état de marche. De plus, un graphique interactif permet de suivre l'évolution de la valeur mesurée au fil du temps.
+
+### Notifications Visuelles en Cas de Dysfonctionnement
+
+Des notifications visuelles ont été intégrées à l'interface pour alerter les utilisateurs en cas de dysfonctionnement d'un module. Ces notifications sont conçues pour attirer l'attention de l'utilisateur et lui permettre de réagir rapidement aux problèmes détectés.
+
+### Script de Génération Automatique d'État des Modules
+
+Un script côté serveur a été développé pour générer automatiquement l'état des modules. Ce script surveille en permanence l'état des modules et déclenche des notifications en cas de dysfonctionnement. Il assure ainsi une surveillance continue et proactive de l'état des modules.
+
+### Génération de Données Numériques et Stockage dans la Base de Données
+
+Les modules ont été configurés pour générer des données numériques sur les mesures qu'ils effectuent, telles que la température, la vitesse, etc. Ces données sont ensuite stockées dans la base de données, permettant ainsi de conserver un historique des mesures réalisées. De plus, les modules peuvent tomber en panne et refonctionner de manière aléatoire, assurant ainsi une simulation réaliste de leur fonctionnement dans des conditions variées. La génération de l'historique des données se poursuit de manière transparente même lors de la navigation sur l'interface web de l'application de test.
+
+
 ## Routes
 
 ### Public Routes
@@ -41,3 +72,5 @@
 - **PUT /admin/data_collecteds/update/{data_collecteds}** : Met à jour les informations d'une donnée collectée.
 - **PUT /admin/data_collecteds/speed/{data_collecteds}** : Met à jour rapidement les informations d'une donnée collectée.
 - **DELETE /admin/data_collecteds/delete/{data_collecteds}** : Supprime une donnée collectée.
+
+Ces routes sont essentielles pour naviguer dans l'application et interagir avec les modules IoT simulés.
