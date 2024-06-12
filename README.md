@@ -5,16 +5,24 @@ TrackApp est une application web développée avec le framework Laravel, conçue
 ## Rapport de Réalisation
 
 ### Création de la Base de Données
-
 Une base de données a été créée pour répertorier les modules IoT, leurs détails et l'historique de fonctionnement. Les tables nécessaires ont été conçues pour stocker les informations pertinentes, telles que les modules, les types de mesure et les données collectées.
 
 ### Formulaire d'Inscription des Modules
 
 Un formulaire a été mis en place pour permettre l'inscription de nouveaux modules dans l'application. Ce formulaire recueille les informations nécessaires sur les modules, telles que leur nom, leur emplacement, etc., et les enregistre dans la base de données.
 
+- Route pour ajouter un module : `/admin/modules/create`
+![Capture d'écran](screenshots/3-formulaire_d_ajout_d_un_module.png)
+
+- Route pour mofifier le module d'identifiant 1 : `/admin/admin/modules/edit/2`
+![Capture d'écran](screenshots/4-formulaire_de_modification_d_un_module.png)
+
 ### Page de Visualisation de l'État de Fonctionnement des Modules
 
 Une page de visualisation a été développée pour afficher l'état de fonctionnement des modules. Cette page présente des informations telles que la valeur mesurée actuelle, la durée de fonctionnement, le nombre de données envoyées et l'état de marche. De plus, un graphique interactif permet de suivre l'évolution de la valeur mesurée au fil du temps.
+![Capture d'écran](screenshots/0-page_de_visualisation_des_données.png)
+
+
 
 ### Notifications Visuelles en Cas de Dysfonctionnement
 

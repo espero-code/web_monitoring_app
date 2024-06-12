@@ -2,9 +2,9 @@
 
 @section('content')
 <div >
-    <h3>Create Module</h3>
+    <h3>Ajouter un Module</h3>
     <a href="{{ route('admin.modules.index') }}" class="btn btn-success my-1">
-            Home
+            Revenir à la liste
     </a>
     @include('modules/moduleForm')
         </div>

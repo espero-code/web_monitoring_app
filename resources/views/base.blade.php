@@ -36,7 +36,7 @@
             </div>
         </div>
     </header>
-    <div class="banner navbar-light bg-primary text-light shadow-lg">
+    {{-- <div class="banner navbar-light bg-primary text-light shadow-lg">
         <div class="container">
             <div class="jumbotron py-5">
                 <h1 class="display-4">Suivi de performances en temps réel.</h1>
@@ -51,7 +51,7 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <main class="container-fluid px-0">
         <div class="page-content">
@@ -61,11 +61,7 @@
 
 
 
-    {{-- <footer class="footer mt-auto py-3 bg-primary position-fixed bottom-0 w-100 text-light shadow-lg">
-        <div class="container">
-            <span class="text-muted "></span>
-        </div>
-    </footer> --}}
+
 
 
 
