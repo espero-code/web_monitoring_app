@@ -1,133 +1,152 @@
 @extends('admin')
 
 @section('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endsection
 
 @section('content')
-<div >
-<h3> Data_collecteds Details</h3>
+    <div>
+        <h3> Liste des données collectées </h3>
 
-<div class="d-flex justify-content-end">
-    <div class="dropdown m-1">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Column
-        </button>
-        <div id="columnSelector" class="dropdown-menu"> </div>
-    </div>
-    <a href="{{ route('admin.data_collecteds.create') }}" class="btn btn-success m-1">
+        <div class="d-flex justify-content-end">
+            <div class="dropdown m-1">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Column
+                </button>
+                <div id="columnSelector" class="dropdown-menu"> </div>
+            </div>
 
-            Create Data_collected
+        </div>
+        <div class="">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="Data_collected" class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">N#</th>
+                                <th scope="col">Module</th>
+                                <th scope="col">Measured Value</th>
+                                <th scope="col">Running Time</th>
+                                <th scope="col">Running Status</th>
+                                <th scope="col">Data Count</th>
 
-    </a>
-</div>
-<div class="">
-    <div class="card-body">
-    <div class="table-responsive">
-        <table  id="Data_collected" class="table">
-            <thead>
-                <tr>
-                    <th scope="col">N#</th>
-						<th scope="col">Measured_value</th>
-						<th scope="col">Running_time</th>
-						<th scope="col">Running_status</th>
-						<th scope="col">Data_count</th>
 
-						<th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($data_collecteds as $data_collected)
-						<tr><td>{{ $data_collected->id }}</td>
-							<td>{{ $data_collected->measured_value }}</td>
-							<td>{{ $data_collected->running_time }}</td>
-							<td>{{ $data_collected->running_status }}</td>
-							<td>{{ $data_collected->data_count }}</td>
-						<td>
-                    <a href="{{ route('admin.data_collecteds.show', ['id' => $data_collected->id]) }}" class="btn btn-primary btn-sm">
-                        <i class="fa-solid fa-eye"></i>
-                    </a>
-                    <a href="{{ route('admin.data_collecteds.edit', ['id' => $data_collected->id]) }}" class="btn btn-success btn-sm">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <a href="#" data-id="{{ $data_collected->id }}" class="btn btn-danger btn-sm deleteBtn">
-                        <i class="fa-solid fa-trash"></i>
-                    </a>
-                </td>
-						</tr>
-					@endforeach
-            </tbody>
-        </table>
-    </div>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data_collecteds as $data_collected)
+                                <tr>
+                                    <td>{{ $data_collected->id }}</td>
+                                    <td>{{ $data_collected->module->name }}</td>
+                                    <td>{{ $data_collected->measured_value }}</td>
+                                    <td>{{ $data_collected->running_time }}</td>
+                                    <td>
+                                        <a href="#" data-bs-toggle="tooltip"
+                                            data-bs-title="{{ $data_collected->running_status == 1 ? 'En cours' : 'Arrêté' }}">
 
-        <!-- Pagination -->
-        <div class="d-flex justify-content-center">
-            {{ $data_collecteds->links('pagination::bootstrap-5') }}
+                                            <span
+                                                class="status {{ $data_collected->running_status == 1 ? 'status-success' : 'status-danger' }}">
+
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td>{{ $data_collected->data_count }}</td>
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="d-flex justify-content-center">
+                    {{ $data_collecteds->links('pagination::bootstrap-5') }}
+                </div>
+            </div>
         </div>
     </div>
-</div>
-</div>
 
 
     <!-- Modal -->
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h3 class="modal-title fs-5" id="confirmModalLabel">Delete confirm</h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="confirmModalLabel">Delete confirm</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary confirmDeleteAction">Delete</button>
+                </div>
             </div>
-            <div class="modal-body">
-            ...
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary confirmDeleteAction">Delete</button>
-            </div>
-        </div>
         </div>
     </div>
 @endsection
 @section('scripts')
-
     <script>
         const checkboxs = document.querySelectorAll('input[type="checkbox"]')
 
         checkboxs.forEach((checkbox) => {
 
-        checkbox.onchange = async (event) => {
-            const { checked, name, dataset } = event.target;
-            const { id } = dataset;
-            console.log({ checked, name, id });
-            const data = { [name]: checked.toString() };
-            const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-            const response = await fetch('/admin/data_collecteds/speed/' + id, {
-                method: 'PUT',
-                body: JSON.stringify(data), // Utilisation de JSON.stringify au lieu de JSON.stringfy
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                }
-            });
-        };
+            checkbox.onchange = async (event) => {
+                const {
+                    checked,
+                    name,
+                    dataset
+                } = event.target;
+                const {
+                    id
+                } = dataset;
+                console.log({
+                    checked,
+                    name,
+                    id
+                });
+                const data = {
+                    [name]: checked.toString()
+                };
+                const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+                const response = await fetch('/admin/data_collecteds/speed/' + id, {
+                    method: 'PUT',
+                    body: JSON.stringify(
+                    data), // Utilisation de JSON.stringify au lieu de JSON.stringfy
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    }
+                });
+            };
         })
 
         const deleteButtons = document.querySelectorAll('.deleteBtn')
         deleteButtons.forEach(deleteButton => {
-            deleteButton.addEventListener('click', (event)=>{
+            deleteButton.addEventListener('click', (event) => {
                 event.preventDefault();
-                const { id , title } = deleteButton.dataset
+                const {
+                    id,
+                    title
+                } = deleteButton.dataset
                 const modalBody = document.querySelector('.modal-body')
                 modalBody.innerHTML = `Are you sure you want to delete this data ?</strong> `
-                console.log({ id , title });
+                console.log({
+                    id,
+                    title
+                });
                 const modal = new bootstrap.Modal(document.querySelector('#confirmModal'))
                 modal.show()
                 const confirmDeleteBtn = document.querySelector('.confirmDeleteAction')
 
-                confirmDeleteBtn.addEventListener('click',async ()=>{
-                    const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-                    const response = await fetch('/admin/data_collecteds/delete/'+id , {
+                confirmDeleteBtn.addEventListener('click', async () => {
+                    const csrfToken = document.head.querySelector('meta[name="csrf-token"]')
+                        .content;
+                    const response = await fetch('/admin/data_collecteds/delete/' + id, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
@@ -137,7 +156,7 @@
 
                     const result = await response.json()
 
-                    if(result && result.isSuccess){
+                    if (result && result.isSuccess) {
                         window.location.href = window.location.href;
                     }
 
@@ -160,7 +179,7 @@
                 const label = document.createElement('label');
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
-                checkbox.role="switch"
+                checkbox.role = "switch"
                 checkbox.className = 'columnSelector form-check-input';
                 checkbox.dataset.column = index;
                 const savedSelection = localStorage.getItem('selectedColumns#Data_collected');
@@ -244,13 +263,18 @@
             const table = document.getElementById('Data_collected');
             const rows = Array.from(table.querySelectorAll('tbody tr'));
 
-            console.log({rows});
+            console.log({
+                rows
+            });
 
             rows.sort((a, b) => {
                 const cellA = a.querySelectorAll('td')[columnIndex].textContent;
                 const cellB = b.querySelectorAll('td')[columnIndex].textContent;
 
-                return cellA.localeCompare(cellB, undefined, { numeric: true, sensitivity: 'base' });
+                return cellA.localeCompare(cellB, undefined, {
+                    numeric: true,
+                    sensitivity: 'base'
+                });
             });
 
             table.querySelector('tbody').innerHTML = '';

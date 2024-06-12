@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MeasuredType;
 use App\Models\Module;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class ModuleController extends BaseController
 {
     public function index(): View
     {
-        $modules = Module::orderBy('created_at', 'desc')->paginate(11);
+        $modules = Module::orderBy('created_at', 'desc')->paginate(10);
         return view('modules/index', ['modules' => $modules]);
     }
 
@@ -25,19 +26,27 @@ class ModuleController extends BaseController
     }
     public function create(): View
     {
-        return view('modules/create');
+        $measuredTypes = MeasuredType::all();
+        return view('modules/create',[
+            'measuredTypes' => $measuredTypes
+        ]);
     }
 
     public function edit($id): View
     {
         $module = Module::findOrFail($id);
-        return view('modules/edit', ['module' => $module]);
+        $measuredTypes = MeasuredType::all();
+
+        // dd($measuredTypes);
+        return view('modules/edit', [
+            'module' => $module,
+            'measuredTypes' => $measuredTypes
+        ]);
     }
 
     public function store(ModuleFormRequest $req): RedirectResponse
     {
         $data = $req->validated();
-
 
 
         $module = Module::create($data);

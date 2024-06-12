@@ -13,7 +13,7 @@ class DataCollectedController extends BaseController
 {
     public function index(): View
     {
-        $data_collecteds = DataCollected::orderBy('created_at', 'desc')->paginate(5);
+        $data_collecteds = DataCollected::orderBy('created_at', 'desc')->paginate(10);
         return view('data_collecteds/index', ['data_collecteds' => $data_collecteds]);
     }
 

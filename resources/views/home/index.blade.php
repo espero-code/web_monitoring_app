@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', 'Accueil')
+@section('title', 'TrackApp ')
 
 @section('content')
     <div class="row">
@@ -34,17 +34,12 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip"
-                                                data-bs-title="Valeur calculée : ( {{ $measuredType->name }} )">Valeur </a>
-                                        </th>
-                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip"
-                                                data-bs-title="Temps de fonctionnement">Temps </a> </th>
-                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip"
-                                                data-bs-title="Statut de fonctionnement">Status </a> </th>
-                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip"
-                                                data-bs-title="Nombre de données">Quantité </a> </th>
-                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip"
-                                                data-bs-title="Collectée le">Depuis </a> </th>
+                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip" data-bs-title="Module">Module </a> </th>
+                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip" data-bs-title="Valeur calculée : ( {{ $measuredType->name }} )">Valeur </a> </th>
+                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip" data-bs-title="Temps de fonctionnement">Temps </a> </th>
+                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip" data-bs-title="Statut de fonctionnement">Status </a> </th>
+                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip" data-bs-title="Nombre de données">Quantité </a> </th>
+                                        <th scope="col"> <a href="#" data-bs-toggle="tooltip" data-bs-title="Collectée le">Depuis </a> </th>
 
                                     </tr>
                                 </thead>
@@ -55,9 +50,8 @@
 
                                     @foreach ($datas as $data)
                                         <tr>
-                                            <th scope="row">
-                                                {{ $totalCount - $datas->perPage() * ($datas->currentPage() - 1) - $loop->index }}
-                                            </th>
+                                            <th scope="row"> {{ $totalCount - $datas->perPage() * ($datas->currentPage() - 1) - $loop->index }}</th>
+                                            <td>{{ $data->module->name }}</td>
                                             <td>{{ $data->measured_value }}</td>
                                             <td>{{ $data->running_time }}</td>
                                             <td>
@@ -102,6 +96,7 @@
         const labels = {!! json_encode($labels) !!};
         const values = {!! json_encode($values) !!};
         const label = {!! json_encode($measuredType->name) !!};
+        localStorage.setItem('currentModuleSlug', '{{ $slug }}')
 
         // Initialiser le graphique
         var ctx = document.getElementById('myChart').getContext('2d');
@@ -115,7 +110,7 @@
                     fill: true,
                     borderColor: 'rgb(13, 110, 253)',
                     backgroundColor: 'rgba(13, 110, 253)',
-                    tension: 0.6
+                    tension: 0.4
                 }]
             },
             options: {
@@ -135,6 +130,7 @@
                 }
             }
         });
+        window.myChart = myChart
     </script>
 
 @endsection

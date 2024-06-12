@@ -48,9 +48,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //Delete Module
     Route::delete('/modules/delete/{module}', 'App\Http\Controllers\ModuleController@delete')->name('modules.delete');
 
-});
 
-Route::prefix('admin')->name('admin.')->group(function(){
 
     //Get Measured_types datas
     Route::get('/measured_types', 'App\Http\Controllers\MeasuredTypeController@index')->name('measured_types.index');
@@ -68,7 +66,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::post('/measured_types/store', 'App\Http\Controllers\MeasuredTypeController@store')->name('measured_types.store');
 
     //Update One Measured_type
-    Route::put('/measured_types/update/{measured_types}', 'App\Http\Controllers\MeasuredTypeController@update')->name('measured_types.update');
+    Route::put('/measured_types/update/{measured_type}', 'App\Http\Controllers\MeasuredTypeController@update')->name('measured_types.update');
 
     //Update One Measured_type Speedly
     Route::put('/measured_types/speed/{measured_types}', 'App\Http\Controllers\MeasuredTypeController@updateSpeed')->name('measured_types.update.speed');
@@ -76,8 +74,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //Delete Measured_type
     Route::delete('/measured_types/delete/{measured_types}', 'App\Http\Controllers\MeasuredTypeController@delete')->name('measured_types.delete');
 
-});
-Route::prefix('admin')->name('admin.')->group(function(){
+
 
     //Get DataCollecteds datas
     Route::get('/data_collecteds', 'App\Http\Controllers\DataCollectedController@index')->name('data_collecteds.index');

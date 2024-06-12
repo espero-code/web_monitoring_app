@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,11 +15,8 @@ return new class extends Migration {
             $table->string('slug')->unique();
             $table->string('description')->nullable();
             $table->boolean('status')->default(false);
+            $table->foreignIdFor(\App\Models\MeasuredType::class)->nullable()->constrained();
             $table->timestamps();
-        });
-
-        Schema::table('modules', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\MeasuredType::class)->constrained();
         });
     }
 

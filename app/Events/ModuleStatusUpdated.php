@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\DataCollected;
 use App\Models\Module;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -15,15 +16,17 @@ class ModuleStatusUpdated implements ShouldBroadcast
 
     public $module;
     public $status;
+    public $data_collected;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(Module $module, $status)
+    public function __construct(Module $module, $status, DataCollected $data_collected)
     {
         //
         $this->module = $module;
         $this->status = $status;
+        $this->data_collected = $data_collected;
     }
 
     /**
@@ -31,7 +34,7 @@ class ModuleStatusUpdated implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn() 
+    public function broadcastOn()
     {
         return new Channel('module-status');
     }
@@ -41,6 +44,7 @@ class ModuleStatusUpdated implements ShouldBroadcast
         return [
             'module' => $this->module->toArray(),
             'status' => $this->status,
+            'data_collected' => $this->data_collected->toArray(),
         ];
     }
 }

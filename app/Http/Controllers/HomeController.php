@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\DataCollected;
 use App\Models\Module;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -13,107 +12,84 @@ class HomeController extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-
+    /**
+     * Display the home page with module data.
+     *
+     * @param string|null $slug
+     * @return \Illuminate\View\View
+     */
     public function index($slug = null)
     {
-        // Définir la valeur par défaut
-        $defaultPerPage = 5;
+        $data = $this->fetchModuleData($slug, 5);
+        return view('home/index', $data);
+    }
 
-        // Récupérer la valeur de totalPerPage depuis la requête ou la session
+    /**
+     * Return the module data in JSON format.
+     *
+     * @param string|null $slug
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function get_module_datas($slug = null)
+    {
+        $data = $this->fetchModuleData($slug, 5);
+        return response()->json($data);
+    }
+
+    /**
+     * Fetch the module data and format it for display.
+     *
+     * @param string|null $slug
+     * @param int $defaultPerPage
+     * @return array
+     */
+    private function fetchModuleData($slug, $defaultPerPage)
+    {
+        // Get the totalPerPage value from the request or session
         $totalPerPage = request()->get('totalPerPage', session('totalPerPage', $defaultPerPage));
 
-        // Stocker la valeur dans la session
+        // Store the value in the session
         session(['totalPerPage' => $totalPerPage]);
 
+        // Retrieve all modules
         $modules = Module::all();
 
-        if ($slug) {
-            $module = Module::where('slug', $slug)->with('measuredType')->firstOrFail();
-        } else {
-            $module = Module::with('measuredType')->first();
-            $slug = $module ? $module->slug : null;
-        }
+        // Retrieve the specified module by slug or the first module if no slug is provided
+        $module = $slug
+            ? Module::where('slug', $slug)->with('measuredType')->firstOrFail()
+            : Module::with('measuredType')->first();
 
-        $measuredType = $module->measuredType;
+        $measuredType = $module ? $module->measuredType : null;
 
-        if ($module) {
-            $datas = DataCollected::where('module_id', $module->id)
+        // Fetch data collected for the module
+        $datas = $module
+            ? DataCollected::where('module_id', $module->id)
                 ->orderBy('created_at', 'desc')
                 ->paginate($totalPerPage)
                 ->onEachSide(2)
-                ;
-        } else {
-            $datas = collect(); // Créer une collection vide si aucun module n'est trouvé
+            : collect(); // Create an empty collection if no module is found
+
+        // Initialize labels and values arrays
+        $labels = [];
+        $values = [];
+
+        // Loop through the data to extract labels and values
+        foreach ($datas as $data) {
+            array_unshift($labels, $data->created_at->diffForHumans());
+            array_unshift($values, $data->measured_value);
         }
 
-        // Récupérer les labels (temps) et les valeurs (valeurs calculées)
-        $labels = $datas->pluck('created_at')->map(function ($date) {
-            return $date->diffForHumans();
-        });
 
-        $values = $datas->pluck('measured_value');
-
-
-        return view("home/index", [
+        return [
             'modules' => $modules,
             'module' => $module,
             'measuredType' => $measuredType,
-            'slug' => $slug,
+            'slug' => $module ? $module->slug : null,
             'datas' => $datas,
             'labels' => $labels,
             'values' => $values,
-            'totalPerPage' => $totalPerPage
-        ]);
+            'totalPerPage' => $totalPerPage,
+        ];
     }
-
-    public function get_module_datas($slug = null)
-    {
-        // Définir la valeur par défaut
-        $defaultPerPage = 30;
-
-        // Récupérer la valeur de totalPerPage depuis la requête ou la session
-        $totalPerPage = request()->get('totalPerPage', session('totalPerPage', $defaultPerPage));
-
-        // Stocker la valeur dans la session
-        session(['totalPerPage' => $totalPerPage]);
-
-        $modules = Module::all();
-
-        if ($slug) {
-            $module = Module::where('slug', $slug)->with('measuredType')->firstOrFail();
-        } else {
-            $module = Module::with('measuredType')->first();
-            $slug = $module ? $module->slug : null;
-        }
-
-        $measuredType = $module->measuredType;
-
-        if ($module) {
-            $datas = DataCollected::where('module_id', $module->id)
-                ->orderBy('created_at', 'desc')
-                ->paginate($totalPerPage);
-        } else {
-            $datas = collect(); // Créer une collection vide si aucun module n'est trouvé
-        }
-
-        // Récupérer les labels (temps) et les valeurs (valeurs calculées)
-        $labels = $datas->pluck('created_at')->map(function ($date) {
-            return $date->diffForHumans();
-        });
-
-        $values = $datas->pluck('measured_value');
-
-        return response()->json([
-            'modules' => $modules,
-            'module' => $module,
-            'measuredType' => $measuredType,
-            'slug' => $slug,
-            'datas' => $datas,
-            'labels' => $labels,
-            'values' => $values,
-            'totalPerPage' => $totalPerPage
-        ]);
-    }
-
-
+    
 }

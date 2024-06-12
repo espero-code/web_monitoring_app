@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8">
             <form
-                action="{{ isset($measured_type) ? route('admin.measured_types.update', ['measured_types' => $measured_type->id]) : route('admin.measured_types.store') }}"
+                action="{{ isset($measured_type) ? route('admin.measured_types.update', ['measured_type' => $measured_type->id]) : route('admin.measured_types.store') }}"
                 method="POST">
                 @csrf
                 @if (isset($measured_type))
@@ -35,8 +35,8 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="min_value" class="form-label">Min_value</label>
-                    <input type="text" placeholder="Min_value ..." name="min_value"
+                    <label for="min_value" class="form-label">Min Value</label>
+                    <input type="text" placeholder="Min Value ..." name="min_value"
                         value="{{ old('min_value', isset($measured_type) ? $measured_type->min_value : '') }}"
                         class="form-control" id="min_value" aria-describedby="min_valueHelp" required />
 
@@ -47,8 +47,8 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="max_value" class="form-label">Max_value</label>
-                    <input type="text" placeholder="Max_value ..." name="max_value"
+                    <label for="max_value" class="form-label">Max Value</label>
+                    <input type="text" placeholder="Max value ..." name="max_value"
                         value="{{ old('max_value', isset($measured_type) ? $measured_type->max_value : '') }}"
                         class="form-control" id="max_value" aria-describedby="max_valueHelp" required />
 

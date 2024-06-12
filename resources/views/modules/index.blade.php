@@ -8,19 +8,19 @@
 
 @section('content')
     <div>
-        <h3> Modules Details</h3>
+        <h3>Liste des modules</h3>
 
         <div class="d-flex justify-content-end">
             <div class="dropdown m-1">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    Column
+                    Colonnes
                 </button>
                 <div id="columnSelector" class="dropdown-menu"> </div>
             </div>
             <a href="{{ route('admin.modules.create') }}" class="btn btn-success m-1">
 
-                Create Module
+                Ajouter un module
 
             </a>
         </div>
@@ -35,6 +35,7 @@
                                 <th scope="col">Slug</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Valeur Mesurée</th>
 
                                 <th scope="col">Actions</th>
                             </tr>
@@ -46,6 +47,7 @@
                                     <td>{{ $module->name }}</td>
                                     <td>{{ $module->slug }}</td>
                                     <td>{{ $module->description }}</td>
+
                                     <td>
 
 
@@ -58,6 +60,7 @@
                                         </a>
 
                                     </td>
+                                    <td>{{ $module->measuredType->name }}</td>
                                     <td>
                                         <a href="{{ route('admin.modules.show', ['id' => $module->id]) }}"
                                             class="btn btn-primary btn-sm">
@@ -67,7 +70,7 @@
                                             class="btn btn-success btn-sm">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
-                                        <a href="#" data-id="{{ $module->id }}"
+                                        <a href="#" data-id="{{ $module->id }}" data-name="{{ $module->name }}"
                                             class="btn btn-danger btn-sm deleteBtn">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
@@ -92,15 +95,15 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title fs-5" id="confirmModalLabel">Delete confirm</h3>
+                    <h3 class="modal-title fs-5" id="confirmModalLabel">Confirmation de suppression</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     ...
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary confirmDeleteAction">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary confirmDeleteAction">Oui, supprimer</button>
                 </div>
             </div>
         </div>
@@ -148,14 +151,11 @@
                 event.preventDefault();
                 const {
                     id,
-                    title
+                    name
                 } = deleteButton.dataset
                 const modalBody = document.querySelector('.modal-body')
-                modalBody.innerHTML = `Are you sure you want to delete this data ?</strong> `
-                console.log({
-                    id,
-                    title
-                });
+                modalBody.innerHTML = `Êtes-vous sûr de vouloir supprimer le module : <strong>${name}</strong>  ? Cette action est iréversible.</strong> `
+
                 const modal = new bootstrap.Modal(document.querySelector('#confirmModal'))
                 modal.show()
                 const confirmDeleteBtn = document.querySelector('.confirmDeleteAction')

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
 </head>
 
 <body>
@@ -22,8 +22,8 @@
             </a>
         </h2>
         <div class="d-flex gap-5 aic">
-            <a href="{{ route('admin.modules.index') }}">
-                <i class="fas fa-user-circle"></i>
+            <a href="{{ route('admin.modules.index') }}" target="_blank">
+                <i class="fas fa-gear"></i>
             </a>
             <div class="dropdown">
                 <div class="position-relative dropdown-toggle d-none" id="notification-icon" data-bs-toggle="dropdown"
@@ -36,10 +36,10 @@
             </div>
         </div>
     </header>
-    {{-- <div class="banner navbar-light bg-primary text-light shadow-lg">
+    <div class="banner navbar-light bg-primary text-light shadow-lg">
         <div class="container">
             <div class="jumbotron py-5">
-                <h1 class="display-4">Bienvenue sur notre site de suivi de performances.</h1>
+                <h1 class="display-4">Suivi de performances en temps réel.</h1>
                 <hr class="my-4">
                 <p class="lead">
                     Découvrez les performances, le fonctionnement et la disponibilité de vos différents appareils
@@ -51,7 +51,7 @@
 
             </div>
         </div>
-    </div> --}}
+    </div>
 
     <main class="container-fluid px-0">
         <div class="page-content">
@@ -70,6 +70,7 @@
 
 
     <!-- Inclure Bootstrap JS -->
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>
@@ -83,6 +84,7 @@
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
     @yield('scripts')
+    @vite(['resources/js/app.js'])
 </body>
 
 </html>

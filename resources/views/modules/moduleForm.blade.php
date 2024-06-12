@@ -37,8 +37,11 @@
                 <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
                     <select name="status" class="form-control" id="status" aria-describedby="statusHelp" required>
-                        <option value="1" {{ old('status', isset($module) && $module->status == true ? 'selected' : '') }}>On</option>
-                        <option value="0" {{ old('status', isset($module) && $module->status == false ? 'selected' : '') }}>Off</option>
+                        <option value="1"
+                            {{ old('status', isset($module) && $module->status == true ? 'selected' : '') }}>On</option>
+                        <option value="0"
+                            {{ old('status', isset($module) && $module->status == false ? 'selected' : '') }}>Off
+                        </option>
                     </select>
 
                     @error('status')
@@ -47,18 +50,31 @@
                         </div>
                     @enderror
                 </div>
+
+                <div class="mb-3">
+                    <label for="measured_type" class="form-label">Type de Données à Collecter</label>
+                    <select name="measured_type_id" class="form-control" id="measured_type" required>
+                        @foreach ($measuredTypes as $type)
+                            <option value="{{ $type->id }}"
+                                {{ old('measured_type_id', isset($module) && $module->measured_type_id == $type->id ? 'selected' : '') }}>
+                                {{ $type->name }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    @error('measured_type')
+                        <div class="error text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 <a href="{{ route('admin.modules.index') }}" class="btn btn-danger mt-1">
-                    Cancel
+                    Annuler
                 </a>
-                <button class="btn btn-primary mt-1"> {{ isset($module) ? 'Update' : 'Create' }}</button>
+                <button class="btn btn-primary mt-1"> {{ isset($module) ? 'Mettre à jour' : 'Ajouter' }}</button>
             </form>
         </div>
-        <div class="col-md-4">
-            <a class="btn btn-danger mt-1" href="{{ route('admin.modules.index') }}">
-                Cancel
-            </a>
-            <button class="btn btn-primary mt-1"> {{ isset($module) ? 'Update' : 'Create' }}</button>
-        </div>
+
     </div>
 
     @section('scripts')
@@ -103,7 +119,7 @@
                             if (file) {
                                 const reader = new FileReader();
                                 const img = document.createElement(
-                                'img'); // Créer un élément img pour chaque image
+                                    'img'); // Créer un élément img pour chaque image
 
                                 reader.onload = function(event) {
                                     img.src = event.target.result;

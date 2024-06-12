@@ -11,7 +11,7 @@
         <h3>Show Module</h3>
 
         <a href="{{ route('admin.modules.index') }}" class="btn btn-success my-1">
-            Home
+            Revenir à la liste
         </a>
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -20,10 +20,7 @@
                         <th>Name</th>
                         <td>{{ $module->name }}</td>
                     </tr>
-                    <tr>
-                        <th>Slug</th>
-                        <td>{{ $module->slug }}</td>
-                    </tr>
+
                     <tr>
                         <th>Description</th>
                         <td>{{ $module->description }}</td>
@@ -40,13 +37,17 @@
                         </a>
                         </td>
                     </tr>
+                    <tr>
+                        <th>Valeur mesurée</th>
+                        <td>{{ $module->measuredType->name }}</td>
+                    </tr>
 
                 </tbody>
             </table>
 
             <div>
                 <a href="{{ route('admin.modules.edit', ['id' => $module->id]) }}" class="btn btn-primary my-1">
-                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                    <i class="fa-solid fa-pen-to-square"></i> Modifier cet module
                 </a>
             </div>
         </div>

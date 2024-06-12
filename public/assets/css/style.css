@@ -1,71 +1,105 @@
-body {
+/* Reset and General Styles */
+
+/* Apply box-sizing to all elements for consistency */
+* {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Set the default font family */
+body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Header Styles */
+
+/* Set the height of the header */
 header {
     height: 80px;
-}
-
-header {
-    color: white !important;
+    color: white; /* Ensure text is visible against background */
     display: flex;
-    align-items: center;
-
+    align-items: center; /* Center items vertically */
 }
 
+/* Add a text shadow effect to header headings for better visibility */
 header h2 {
     text-shadow: 1px 2px 3px #090909;
 }
 
+/* Page Content Styles */
+
+/* Limit overflow and adjust height if necessary */
 .page-content {
-    overflow: hidden;
-    /* height: calc(100vh - 80px);
-    overflow-y: auto; */
+    overflow: hidden; /* Overflow behavior */
+    /* height: calc(100vh - 80px); */ /* Uncomment if needed */
+    /* overflow-y: auto; */ /* Uncomment if needed */
 }
 
+/* Flex Utility Classes */
+
+/* Flex container */
 .flex {
     display: flex;
 }
 
+/* Justify content center */
 .jcc {
     justify-content: center;
 }
 
+/* Justify content space-between */
 .jsb {
     justify-content: space-between;
 }
 
+/* Align items center */
 .aic {
     align-items: center;
 }
-.jca{
+
+/* Justify content space-around */
+.jca {
     justify-content: space-around;
 }
 
+/* Notification Icon Styles */
+
+/* Set a fixed width for the notification icon */
 #notification-icon {
     width: 100px;
 }
 
+/* Adjust icon size */
 header i {
     font-size: 2rem;
 }
-#notification-list{
+
+/* Notification List Styles */
+
+/* Limit height and enable vertical scrolling */
+#notification-list {
     max-height: 30vh;
     width: 300px;
-    overflow: hidden;
-    overflow-y: auto;
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
+/* Adjust badge position */
 #notification-icon .badge {
     left: 20px;
 }
 
+/* Link Styles */
+
+/* Override default link styles */
 a {
-    color: inherit !important;
-    text-decoration: none !important;
+    color: inherit; /* Inherit text color */
+    text-decoration: none; /* Remove underline */
 }
 
+/* Status Indicator Styles */
+
+/* Style for status indicator */
 .status {
     width: 20px;
     height: 20px;
@@ -74,32 +108,44 @@ a {
     margin: 0 auto;
 }
 
+/* Success status indicator */
 .status-success {
-    background-color: green !important;
+    background-color: green;
 }
 
+/* Danger status indicator */
 .status-danger {
-    background-color: red !important;
+    background-color: red;
 }
 
-.col-md-6>.table-zone {
-    max-height: calc(100vh - 300px);
-    overflow: hidden;
-    overflow-y: auto;
+/* Table Zone Styles */
+
+/* Limit height and enable vertical scrolling */
+.col-md-6 > .table-zone {
+    max-height: calc(100vh - 400px);
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
+/* Table Cell Styles */
+
+/* Center align text in table cells */
 table td span,
 table th,
 table td {
     text-align: center;
 }
 
+/* Footer Styles */
 
+/* Set the height of the footer */
 footer {
     height: 80px;
-    z-index: 9999;
+    z-index: 9999; /* Ensure footer is on top */
 }
 
+/* Scrollbar Styles */
+
+/* WebKit scrollbar */
 .table-zone::-webkit-scrollbar {
     width: 12px;
 }
@@ -118,25 +164,28 @@ footer {
     background: #555;
 }
 
-/* Pour Firefox */
+/* Firefox scrollbar */
 .table-zone {
     scrollbar-width: thin;
     scrollbar-color: var(--bs-primary) #f1f1f1;
 }
 
+/* Notification Container Styles */
+
+/* Position and style notification container */
 #notification-container {
     right: 50px;
     max-height: 30vh;
-    overflow: hidden;
-    overflow-y: auto;
+    overflow-y: auto; /* Enable vertical scrolling */
     background-color: white;
     padding: 10px;
 }
 
-.alert {}
+/* Alert Styles */
 
+/* Set the width and adjust spacing for alerts */
 .alert {
-    width: 300px;
+    width: 350px;
     display: flex;
     justify-content: space-between;
 }

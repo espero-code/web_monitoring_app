@@ -13,7 +13,7 @@ class MeasuredTypeController extends BaseController
 {
     public function index(): View
     {
-        $measured_types = MeasuredType::orderBy('created_at', 'desc')->paginate(5);
+        $measured_types = MeasuredType::orderBy('created_at', 'desc')->paginate(10);
         return view('measured_types/index', ['measured_types' => $measured_types]);
     }
 
@@ -38,21 +38,20 @@ class MeasuredTypeController extends BaseController
     {
         $data = $req->validated();
 
-
-
         $measured_type = MeasuredType::create($data);
-        return redirect()->route('admin.measured_type.show', ['id' => $measured_type->id]);
+        return redirect()->route('admin.measured_types.show', ['id' => $measured_type->id]);
     }
 
     public function update(MeasuredType $measured_type, MeasuredTypeFormRequest $req)
     {
-        $data = $req->validated();
 
+        $data = $req->validated();
 
 
         $measured_type->update($data);
 
-        return redirect()->route('admin.measured_type.show', ['id' => $measured_type->id]);
+
+        return redirect()->route('admin.measured_types.show', ['id' => $measured_type->id]);
     }
 
     public function updateSpeed(MeasuredType $measured_type, Request $req)

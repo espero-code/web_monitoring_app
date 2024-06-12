@@ -1,66 +1,43 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Routes
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### Public Routes
 
-## About Laravel
+- **GET /**: Affiche la page d'accueil de l'application.
+- **GET /module/{slug}**: Affiche les détails d'un module spécifique selon son slug.
+- **GET /api/module**: Récupère les données des modules via une API.
+- **GET /api/module/{slug}**: Récupère les données d'un module spécifique via une API.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Routes d'Administration
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#### Modules
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **GET /admin/modules**: Affiche la liste des modules enregistrés.
+- **GET /admin/modules/show/{id}**: Affiche les détails d'un module spécifique.
+- **GET /admin/modules/create**: Affiche le formulaire de création d'un nouveau module.
+- **GET /admin/modules/edit/{id}**: Affiche le formulaire d'édition d'un module spécifique.
+- **POST /admin/modules/store**: Enregistre un nouveau module.
+- **PUT /admin/modules/update/{module}**: Met à jour les informations d'un module.
+- **PUT /admin/modules/speed/{module}**: Met à jour rapidement les informations d'un module.
+- **DELETE /admin/modules/delete/{module}**: Supprime un module.
 
-## Learning Laravel
+#### Types de Mesure
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **GET /admin/measured_types**: Affiche la liste des types de mesure enregistrés.
+- **GET /admin/measured_types/show/{id}**: Affiche les détails d'un type de mesure spécifique.
+- **GET /admin/measured_types/create**: Affiche le formulaire de création d'un nouveau type de mesure.
+- **GET /admin/measured_types/edit/{id}**: Affiche le formulaire d'édition d'un type de mesure spécifique.
+- **POST /admin/measured_types/store**: Enregistre un nouveau type de mesure.
+- **PUT /admin/measured_types/update/{measured_type}**: Met à jour les informations d'un type de mesure.
+- **PUT /admin/measured_types/speed/{measured_type}**: Met à jour rapidement les informations d'un type de mesure.
+- **DELETE /admin/measured_types/delete/{measured_type}**: Supprime un type de mesure.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### Données Collectées
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **GET /admin/data_collecteds**: Affiche la liste des données collectées.
+- **GET /admin/data_collecteds/show/{id}**: Affiche les détails d'une donnée collectée spécifique.
+- **GET /admin/data_collecteds/create**: Affiche le formulaire de création d'une nouvelle donnée collectée.
+- **GET /admin/data_collecteds/edit/{id}**: Affiche le formulaire d'édition d'une donnée collectée spécifique.
+- **POST /admin/data_collecteds/store**: Enregistre une nouvelle donnée collectée.
+- **PUT /admin/data_collecteds/update/{data_collecteds}**: Met à jour les informations d'une donnée collectée.
+- **PUT /admin/data_collecteds/speed/{data_collecteds}**: Met à jour rapidement les informations d'une donnée collectée.
+- **DELETE /admin/data_collecteds/delete/{data_collecteds}**: Supprime une donnée collectée.

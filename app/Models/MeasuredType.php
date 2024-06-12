@@ -9,7 +9,7 @@ class MeasuredType extends Model
 {
     use HasFactory;
 
-	protected $fillable = ['name', 'description'];
+	protected $fillable = ['name', 'description', 'min_value', 'max_value'];
 
 	public function modules()
 	{

@@ -8,7 +8,7 @@
 
 @section('content')
     <div>
-        <h3> Measured Types Details</h3>
+        <h3> Liste des types de données collectés</h3>
 
         <div class="d-flex justify-content-end">
             <div class="dropdown m-1">
@@ -33,8 +33,8 @@
                                 <th scope="col">N#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Description</th>
-                                <th scope="col">Min_value</th>
-                                <th scope="col">Max_value</th>
+                                <th scope="col">Min Value</th>
+                                <th scope="col">Max Value</th>
 
                                 <th scope="col">Actions</th>
                             </tr>

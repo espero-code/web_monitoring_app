@@ -18,7 +18,7 @@ class ModuleStatusController extends BaseController
             // Logique pour sauvegarder l'état dans ModuleHistory
             $data = DataCollected::create([
                 'module_id' => $module->id,
-                'measured_value' => rand(10, 100), // Valeur mesurée factice, à remplacer par la logique réelle
+                'measured_value' => rand($module->measuredType->min_value, $module->measuredType->max_value), // Valeur mesurée factice, à remplacer par la logique réelle
                 'running_time' => rand(2, 10000), // Durée de fonctionnement factice, à remplacer par la logique réelle
                 'data_count' => rand(1, 1000), // Nombre de données envoyées factice, à remplacer par la logique réelle
                 'running_status' => $status,
@@ -28,11 +28,11 @@ class ModuleStatusController extends BaseController
             $module->status = $status;
 
             $module->save();
-            
+
             Log::info($data);
 
             // Diffuser l'événement
-            event(new ModuleStatusUpdated($module, $status));
+            event(new ModuleStatusUpdated($module, $status, $data));
 
             Log::info("Status for module {$module->id}: {$status}");
         }

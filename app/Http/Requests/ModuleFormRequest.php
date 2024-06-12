@@ -25,17 +25,18 @@ class ModuleFormRequest extends FormRequest
         return [
             //
             'name' => $isRequired.'string',
-			'slug' => $isRequired.'',
+			'slug' => '',
 			'description' => $isRequired.'string',
-			'status' => $isRequired.'string'
-			
+			'status' => $isRequired.'string',
+			'measured_type_id' => $isRequired.'string',
+
         ];
     }
     public function prepareForValidation()
     {
         $this->merge([
             'slug' => \Illuminate\Support\Str::slug($this->input('name')),
-			
+
         ]);
     }
 }
