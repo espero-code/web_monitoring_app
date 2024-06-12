@@ -14,7 +14,7 @@ Un formulaire a été mis en place pour permettre l'inscription de nouveaux modu
 - Route pour ajouter un module : `/admin/modules/create`
 ![Capture d'écran](screenshots/3-formulaire_d_ajout_d_un_module.png)
 
-- Route pour mofifier le module d'identifiant 1 : `/admin/admin/modules/edit/2`
+- Route pour modifier un module( exemple : module d'identifiant 2) : `/admin/admin/modules/edit/2`
 ![Capture d'écran](screenshots/4-formulaire_de_modification_d_un_module.png)
 
 ### Page de Visualisation de l'État de Fonctionnement des Modules
@@ -27,6 +27,9 @@ Une page de visualisation a été développée pour afficher l'état de fonction
 ### Notifications Visuelles en Cas de Dysfonctionnement
 
 Des notifications visuelles ont été intégrées à l'interface pour alerter les utilisateurs en cas de dysfonctionnement d'un module. Ces notifications sont conçues pour attirer l'attention de l'utilisateur et lui permettre de réagir rapidement aux problèmes détectés.
+
+- Route  : `/`
+![Capture d'écran](screenshots/6-notification_en_temps_réel.png)
 
 ### Script de Génération Automatique d'État des Modules
 
