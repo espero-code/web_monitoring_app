@@ -30,11 +30,12 @@ services:
         ports:
             - '3306:3306'
         volumes:
-            - 'mysql_data:/var/lib/mysql'
+            - mysql_data:/var/lib/mysql
+            - ./initdb:/docker-entrypoint-initdb.d
         networks:
             - laravel_network
 
-            
+
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
