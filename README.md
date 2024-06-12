@@ -2,6 +2,58 @@
 
 TrackApp est une application web développée avec le framework Laravel, conçue pour collecter en temps réel les performances des modules IoT connectés. Cette application permet de surveiller l'état de fonctionnement des modules, de visualiser les données collectées sous forme de graphiques et de recevoir des notifications en cas de dysfonctionnement.
 
+## Comment lancer l'application ?
+
+Pour lancer l'application, suivez les étapes suivantes :
+
+1. **Se Mettre à la Racine du Projet** : Assurez-vous d'être dans le répertoire principal de votre projet Laravel.
+
+2. **Installer les Dépendances PHP** : Utilisez la commande `composer install` pour installer les dépendances PHP nécessaires à votre application. Cette commande va télécharger et installer toutes les bibliothèques PHP requises définies dans votre fichier `composer.json`.
+
+   ```bash
+   composer install
+   ```
+
+3. **Installer les Dépendances Node.js** : Utilisez la commande `npm install` pour installer les dépendances Node.js nécessaires à votre application. Cette commande va télécharger et installer toutes les bibliothèques JavaScript requises définies dans votre fichier `package.json`.
+
+   ```bash
+   npm install
+   ```
+
+4. **Démarrer les Conteneurs Docker** : Utilisez la commande `docker-compose up` pour démarrer les conteneurs Docker définis dans votre fichier `docker-compose.yml`. Cette commande va démarrer les conteneurs pour PHP, MySQL et d'autres services nécessaires à votre application.
+
+   ```bash
+   docker-compose up
+   ```
+
+   Cette commande va lancer les conteneurs en arrière-plan et afficher les journaux de sortie des conteneurs.
+
+5. **Exécuter les Migrations de la Base de Données** : Utilisez la commande `php artisan migrate` pour exécuter les migrations de la base de données. Les migrations sont des scripts PHP qui définissent la structure de la base de données et permettent de créer ou de modifier des tables.
+
+   ```bash
+   php artisan migrate
+   ```
+
+   Cette commande va appliquer toutes les migrations en attente et mettre à jour la structure de la base de données en fonction des migrations définies dans votre application.
+
+6. **Exécuter les Seeders pour Remplir la Base de Données** : Utilisez la commande `php artisan db:seed` pour exécuter les seeders et remplir la base de données avec des données de test.
+
+   ```bash
+   php artisan db:seed
+   ```
+
+   Cette commande va exécuter tous les seeders définis dans votre application, ce qui peut être utile pour pré-remplir la base de données avec des données de test ou des données initiales.
+
+7. **Compiler les Ressources Frontend** : Si votre application utilise des ressources frontend telles que des fichiers CSS et JavaScript, vous devrez les compiler à l'aide de npm. Utilisez la commande `npm run dev` pour compiler les ressources en mode développement.
+
+   ```bash
+   npm run dev
+   ```
+
+   Cette commande va exécuter les scripts définis dans votre fichier `package.json` pour compiler les ressources frontend et les rendre prêtes à être utilisées par votre application.
+
+Une fois que vous avez suivi ces étapes, votre application Laravel devrait être prête à être utilisée. Vous pouvez accéder à votre application via l'URL spécifiée dans votre fichier `docker-compose.yml`, généralement `http://localhost:8000`.
+
 ## Rapport de Réalisation
 
 ### Création de la Base de Données

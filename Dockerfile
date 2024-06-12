@@ -1,52 +1,81 @@
-# Utilisation de l'image webdevops/php-nginx:8.3-alpine comme base
-FROM webdevops/php-nginx:8.3-alpine
+# Use an official PHP image with Apache as the base image.
+FROM php:8.2-apache
 
-# Installation des dépendances nécessaires à PHP
-RUN apk add --no-cache \
-        oniguruma-dev \
-        libxml2-dev \
-        mysql-client
+# Set environment variables.
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Installation des extensions PHP requises
-RUN docker-php-ext-install \
-        bcmath \
-        ctype \
-        fileinfo \
-        mbstring \
-        pdo_mysql \
-        xml
+# Install system dependencies.
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    zip \
+    unzip \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
-# Installation de Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Install Node.js and npm
+# RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+#     && apt-get install -y nodejs
 
-# Installation de NodeJS et npm
-RUN apk add --no-cache nodejs npm
+# # Update npm to the latest version compatible with Node.js 18
+# RUN npm install -g npm@latest-8
 
-# Configuration des variables d'environnement pour PHP-Nginx
-ENV WEB_DOCUMENT_ROOT /app/public
-ENV APP_ENV production
+# Install system timezone data
+RUN apt-get update && apt-get install -y tzdata
 
-# Définition du répertoire de travail
-WORKDIR /app
+# Enable Apache modules required for Laravel.
+RUN a2enmod rewrite
 
-# Copie de l'ensemble des fichiers du projet dans le répertoire de travail
+# Set the Apache document root
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+
+# Update the default Apache site configuration
+COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
+
+# Configure Apache
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+# Restart Apache service
+RUN service apache2 restart
+
+# Install PHP extensions.
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd pdo pdo_mysql
+
+# Install Composer globally.
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Create a directory for your Laravel application.
+WORKDIR /var/www/html
+
+# Copy the Laravel application files into the container.
 COPY . .
 
-# Copie du fichier .env.example pour le renommer en .env
-RUN cp -n .env.example .env
+# Install Laravel dependencies using Composer.
+RUN composer install --no-interaction --optimize-autoloader
 
-# Installation et configuration du site pour la production
-RUN composer install --no-interaction --optimize-autoloader --no-dev
+# Set permissions for Laravel.
+RUN chown -R www-data:www-data storage bootstrap/cache
+
+# Expose port 80 for Apache.
+EXPOSE 80
+
+# Start Apache web server.
+CMD ["apache2-foreground"]
+
+# Additional configurations for Laravel
+# Generate security key
 RUN php artisan key:generate
+# Optimizing Configuration loading
 RUN php artisan config:cache
-# RUN php artisan route:cache
+# Optimizing Route loading
+RUN php artisan route:cache
+# Optimizing View loading
 RUN php artisan view:cache
-RUN php artisan migrate --force
-RUN php artisan db:seed --force
 
-# Compilation des assets (Breeze ou autres)
-RUN npm install
-RUN npm run build
+RUN php artisan config:clear
 
-# Attribution des droits à l'utilisateur application sur le répertoire de travail
-RUN chown -R application:application .
+# RUN php artisan migrate
+
+# RUN php artisan db:seed

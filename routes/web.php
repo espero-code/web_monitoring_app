@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
 Route::get('/module/{slug}', 'App\Http\Controllers\HomeController@index')->name('module_by_slug');
-Route::get('/api/module', 'App\Http\Controllers\HomeController@get_module_datas')->name('home.get_module_datas');
-Route::get('/api/module/{slug}', 'App\Http\Controllers\HomeController@get_module_datas')->name('home.get_module_datas');
+Route::get('/api/module', 'App\Http\Controllers\HomeController@get_module_datas')->name('api.module');
+Route::get('/api/module/{slug}', 'App\Http\Controllers\HomeController@get_module_datas')->name('api.module.slug');
 
 
 
@@ -101,3 +101,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::delete('/data_collecteds/delete/{data_collecteds}', 'App\Http\Controllers\DataCollectedController@delete')->name('data_collecteds.delete');
 
 });
+
+
+Route::fallback(function() {
+    return view('404');
+ });
