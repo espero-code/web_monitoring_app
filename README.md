@@ -52,7 +52,7 @@ ou, si l'archive est au format tar.gz :
 tar -xvzf project.tar.gz -C project-directory
 ```
 
-### Étape 3 : Lancer l'Application
+### Étape 3 : Lancer l'Application avec Docker Compose
 
 1. **Naviguer vers le Répertoire du Projet** :
 
