@@ -93,9 +93,14 @@ Assurez-vous que votre projet contient les fichiers suivants à la racine :
    docker logs -f cron-job-container
    ```
 
-2. **Accéder à Apache** : Ouvrez votre navigateur et accédez à `http://localhost` pour vérifier que le serveur Apache fonctionne.
+2. **Accéder à Apache** : Ouvrez votre navigateur et accédez à `http://localhost` pour vérifier que le serveur Apache fonctionne. Vous devriez avoir une page comme ceci :
+![Capture d'écran](screenshots/0-page_de_visualisation_des_données.png)
 
-3. **Vérifier le Script Cron** : Les messages de log devraient indiquer que le script cron s'exécute à intervalles réguliers.
+3. **Accéder à phpmyadmin** : Ouvrez votre navigateur et accédez à `http://localhost:8080` pour vérifier l'interface de gestion de la base de données. Vous devriez avoir une page comme ceci :
+![Capture d'écran](screenshots/7-php_myadmin.png)
+Les identifiants de connexion sont dan le fichier .env à la racine de du projet.
+
+4. **Vérifier le Script Cron** : Les messages de log devraient indiquer que le script cron s'exécute à intervalles réguliers.
 
 En suivant ces étapes, vous devriez être en mesure de lancer et vérifier le bon fonctionnement de votre application en utilisant Docker et Docker Compose.
 

@@ -10,7 +10,7 @@ services:
         ports:
             - '80:80'
         environment:
-            MYSQL_ROOT_PASSWORD: root
+            MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
             APACHE_DOCUMENT_ROOT: /var/www/html/public
             APACHE_RUN_USER: www-data
             APACHE_RUN_GROUP: www-data
