@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    @vite(['resources/css/app.css'])
+
 </head>
 
 <body>
@@ -80,7 +80,17 @@
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
     @yield('scripts')
-    @vite(['resources/js/app.js'])
+
+    @if (app()->environment('production'))
+        @php
+            $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        @endphp
+
+        <script type="module" src="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}"></script>
+        <link rel="stylesheet" href="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}">
+    @else
+        @vite(['resources/js/app.js'])
+    @endif
 </body>
 
 </html>

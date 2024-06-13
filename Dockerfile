@@ -15,11 +15,12 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js and npm
-# RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-#     && apt-get install -y nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
 
-# # Update npm to the latest version compatible with Node.js 18
-# RUN npm install -g npm@latest-8
+# Installer npm et pm2
+RUN npm install -g npm@8 pm2
+
 
 # Install system timezone data
 RUN apt-get update && apt-get install -y tzdata
@@ -55,14 +56,13 @@ COPY . .
 # Install Laravel dependencies using Composer.
 RUN composer install --no-interaction --optimize-autoloader
 
+# Installer les dépendances Node.js
+COPY package*.json ./
+RUN npm install
+
 # Set permissions for Laravel.
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Expose port 80 for Apache.
-EXPOSE 80
-
-# Start Apache web server.
-CMD ["apache2-foreground"]
 
 # Additional configurations for Laravel
 # Generate security key
@@ -76,6 +76,18 @@ RUN php artisan view:cache
 
 RUN php artisan config:clear
 
-#RUN php artisan migrate
+# Copier le script cron.js dans le répertoire de travail
+COPY cron.js .
 
-#RUN php artisan db:seed
+# Copier le script de démarrage
+COPY start.sh .
+
+# Rendre le script exécutable
+RUN chmod +x start.sh
+
+# Expose port 80 for Apache.
+EXPOSE 80
+
+# Start Apache web server.
+CMD ["./start.sh"]
+
