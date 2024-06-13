@@ -90,7 +90,7 @@ Assurez-vous que votre projet contient les fichiers suivants à la racine :
 1. **Consulter les Logs** : Pour vérifier que tout fonctionne correctement, vous pouvez consulter les logs du conteneur en utilisant :
 
    ```bash
-   docker logs -f laravel
+   docker logs -f laravel-app
    ```
 
 2. **Accéder à Apache** : Ouvrez votre navigateur et accédez à `http://localhost` pour vérifier que le serveur Apache fonctionne. Vous devriez avoir une page comme ceci :
