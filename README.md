@@ -2,57 +2,104 @@
 
 TrackApp est une application web développée avec le framework Laravel, conçue pour collecter en temps réel les performances des modules IoT connectés. Cette application permet de surveiller l'état de fonctionnement des modules, de visualiser les données collectées sous forme de graphiques et de recevoir des notifications en cas de dysfonctionnement.
 
-## Comment lancer l'application ?
+Pour partager votre projet et fournir des instructions claires pour le déploiement dans un conteneur Docker, voici une documentation complète :
 
-Pour lancer l'application, suivez les étapes suivantes :
+## Comment Lancer l'Application ?
 
-1. **Se Mettre à la Racine du Projet** : Assurez-vous d'être dans le répertoire principal de votre projet Laravel.
+### Étape 1 : Vérifier l'Installation de Docker
 
-2. **Installer les Dépendances PHP** : Utilisez la commande `composer install` pour installer les dépendances PHP nécessaires à votre application. Cette commande va télécharger et installer toutes les bibliothèques PHP requises définies dans votre fichier `composer.json`.
+Assurez-vous que Docker et Docker Compose sont installés sur la machine cible. Utilisez les commandes suivantes pour vérifier :
+
+#### Vérifier Docker
+
+```bash
+docker --version
+```
+
+Vous devriez voir une sortie indiquant la version de Docker installée, par exemple :
+
+```bash
+Docker version 20.10.7, build f0df350
+```
+
+#### Vérifier Docker Compose
+
+```bash
+docker-compose --version
+```
+
+Vous devriez voir une sortie indiquant la version de Docker Compose installée, par exemple :
+
+```bash
+docker-compose version 1.29.2, build 5becea4c
+```
+
+Si Docker ou Docker Compose ne sont pas installés, suivez les instructions d'installation sur le site officiel de Docker :
+- **Docker** : [Installation Docker](https://docs.docker.com/get-docker/)
+- **Docker Compose** : [Installation Docker Compose](https://docs.docker.com/compose/install/)
+
+### Étape 2 : Décompresser le Projet
+
+Décompressez le projet que vous avez partagé. Si le projet est sous forme d'archive (par exemple, `project.zip`), utilisez la commande suivante pour le décompresser :
+
+```bash
+unzip project.zip -d project-directory
+```
+
+ou, si l'archive est au format tar.gz :
+
+```bash
+tar -xvzf project.tar.gz -C project-directory
+```
+
+### Étape 3 : Lancer l'Application
+
+1. **Naviguer vers le Répertoire du Projet** :
+
+   Accédez au répertoire racine du projet décompressé :
 
    ```bash
-   composer install
+   cd project-directory
    ```
 
-3. **Installer les Dépendances Node.js** : Utilisez la commande `npm install` pour installer les dépendances Node.js nécessaires à votre application. Cette commande va télécharger et installer toutes les bibliothèques JavaScript requises définies dans votre fichier `package.json`.
+2. **Démarrer les Conteneurs Docker** :
 
-   ```bash
-   npm install
-   ```
-
-4. **Démarrer les Conteneurs Docker** : Utilisez la commande `docker-compose up` pour démarrer les conteneurs Docker définis dans votre fichier `docker-compose.yml`. Cette commande va démarrer les conteneurs pour PHP, MySQL et d'autres services nécessaires à votre application.
+   Exécutez la commande suivante pour construire et démarrer les conteneurs Docker définis dans le fichier `docker-compose.yml` :
 
    ```bash
    docker-compose up
    ```
 
-   Cette commande va lancer les conteneurs en arrière-plan et afficher les journaux de sortie des conteneurs.
+   Cette commande :
+   - Construit les images Docker à partir du Dockerfile.
+   - Démarre les conteneurs définis dans le fichier `docker-compose.yml`.
+   - Expose les ports définis pour accéder aux services.
 
-5. **Exécuter les Migrations de la Base de Données** : Utilisez la commande `php artisan migrate` pour exécuter les migrations de la base de données. Les migrations sont des scripts PHP qui définissent la structure de la base de données et permettent de créer ou de modifier des tables.
+### Structure du Projet
+
+Assurez-vous que votre projet contient les fichiers suivants à la racine :
+
+1. **Dockerfile**
+2. **docker-compose.yml**
+3. **start.sh**
+4. **cron.js**
+5. **package.json**
+
+### Vérification
+
+1. **Consulter les Logs** : Pour vérifier que tout fonctionne correctement, vous pouvez consulter les logs du conteneur en utilisant :
 
    ```bash
-   php artisan migrate
+   docker logs -f cron-job-container
    ```
 
-   Cette commande va appliquer toutes les migrations en attente et mettre à jour la structure de la base de données en fonction des migrations définies dans votre application.
+2. **Accéder à Apache** : Ouvrez votre navigateur et accédez à `http://localhost` pour vérifier que le serveur Apache fonctionne.
 
-6. **Exécuter les Seeders pour Remplir la Base de Données** : Utilisez la commande `php artisan db:seed` pour exécuter les seeders et remplir la base de données avec des données de test.
+3. **Vérifier le Script Cron** : Les messages de log devraient indiquer que le script cron s'exécute à intervalles réguliers.
 
-   ```bash
-   php artisan db:seed
-   ```
+En suivant ces étapes, vous devriez être en mesure de lancer et vérifier le bon fonctionnement de votre application en utilisant Docker et Docker Compose.
 
-   Cette commande va exécuter tous les seeders définis dans votre application, ce qui peut être utile pour pré-remplir la base de données avec des données de test ou des données initiales.
 
-7. **Compiler les Ressources Frontend** : Si votre application utilise des ressources frontend telles que des fichiers CSS et JavaScript, vous devrez les compiler à l'aide de npm. Utilisez la commande `npm run dev` pour compiler les ressources en mode développement.
-
-   ```bash
-   npm run dev
-   ```
-
-   Cette commande va exécuter les scripts définis dans votre fichier `package.json` pour compiler les ressources frontend et les rendre prêtes à être utilisées par votre application.
-
-Une fois que vous avez suivi ces étapes, votre application Laravel devrait être prête à être utilisée. Vous pouvez accéder à votre application via l'URL spécifiée dans votre fichier `docker-compose.yml`, généralement `http://localhost:8000`.
 
 ## Rapport de Réalisation
 
