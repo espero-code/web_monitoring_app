@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,14 +13,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
-Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
-Route::get('/module/{slug}', 'App\Http\Controllers\HomeController@index')->name('module_by_slug');
-Route::get('/api/module', 'App\Http\Controllers\HomeController@get_module_datas')->name('api.module');
-Route::get('/api/module/{slug}', 'App\Http\Controllers\HomeController@get_module_datas')->name('api.module.slug');
+// Routes for displaying modules
+Route::get('/module', [HomeController::class, 'module'])->name('module.all');
+Route::get('/module/{slug}', [HomeController::class, 'module'])->name('module.by.slug');
 
-
-
+// API routes for fetching module data
+Route::get('/api/module', [HomeController::class, 'getAllModuleData'])->name('api.module');
+Route::get('/api/module/{slug}', [HomeController::class, 'getAllModuleData'])->name('api.module.slug');
 
 
 Route::prefix('admin')->name('admin.')->group(function(){

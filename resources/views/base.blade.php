@@ -1,57 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', 'TrackApp - Mesure de Performances en Temps Réel')</title> <!-- Titre de la page avec fallback -->
     <!-- Inclure Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- Meta balises pour le référencement -->
+    <meta name="description"
+        content="Application de mesure de performances en temps réel, TrackApp vous permet de surveiller et d'optimiser vos performances avec facilité.">
+    <meta name="keywords"
+        content="TrackApp, mesure de performances, temps réel, surveillance, optimisation, application web">
+    <meta name="author" content="TrackApp">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://www.trackapp.com/"> <!-- URL canonique de votre site -->
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.trackapp.com/">
+    <meta property="og:title" content="TrackApp - Application de Mesure de Performances en Temps Réel">
+    <meta property="og:description"
+        content="Application de mesure de performances en temps réel, TrackApp vous permet de surveiller et d'optimiser vos performances avec facilité.">
+    <meta property="og:image" content="https://www.trackapp.com/images/trackapp-logo.png">
+    <!-- URL de l'image Open Graph -->
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.trackapp.com/">
+    <meta property="twitter:title" content="TrackApp - Application de Mesure de Performances en Temps Réel">
+    <meta property="twitter:description"
+        content="Application de mesure de performances en temps réel, TrackApp vous permet de surveiller et d'optimiser vos performances avec facilité.">
+    <meta property="twitter:image" content="https://www.trackapp.com/images/trackapp-logo.png">
+    <!-- URL de l'image Twitter -->
+
 </head>
 
 <body>
-    <header class="sticky-top d-flex p-2 shadow-lg navbar-light bg-primary jsb">
-        <h2 class="pr-2">
-            <a href="{{ route('home') }}">
-                TrackApp
-            </a>
-        </h2>
-        <div class="d-flex gap-5 aic">
-            <a href="{{ route('admin.modules.index') }}" target="_blank">
-                <i class="fas fa-gear"></i>
-            </a>
-            <div class="dropdown">
-                <div class="position-relative dropdown-toggle d-none" id="notification-icon" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <i class="fas fa-bell"></i>
-                    <span class="badge bg-danger position-absolute bottom-0">0</span>
-                </div>
-                <ul class="dropdown-menu" id="notification-list">
-                </ul>
-            </div>
-        </div>
-    </header>
-    {{-- <div class="banner navbar-light bg-primary text-light shadow-lg">
-        <div class="container">
-            <div class="jumbotron py-5">
-                <h1 class="display-4">Suivi de performances en temps réel.</h1>
-                <hr class="my-4">
-                <p class="lead">
-                    Découvrez les performances, le fonctionnement et la disponibilité de vos différents appareils
-                    connectés.
-                </p>
-                <p class="lead">
-                    Analysez les données pour mieux optimiser leur utilisation.
-                </p>
 
-            </div>
-        </div>
-    </div> --}}
 
     <main class="container-fluid px-0">
         <div class="page-content">
@@ -61,36 +54,55 @@
 
 
 
-
-
-
-
-    <!-- Inclure Bootstrap JS -->
-
+    <!-- Include Bootstrap JS and other scripts -->
+    <script src="{{ asset('assets/js/library.js') }}"></script> <!-- Include your custom JavaScript file -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
 
-
+    <!-- Bootstrap tooltips initialization -->
     <script>
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        // Select all elements with data-bs-toggle="tooltip" attribute
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        // Initialize each tooltip using Bootstrap's Tooltip class
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
     </script>
-    @yield('scripts')
+
+    @yield('scripts') <!-- Area to include page-specific scripts -->
 
     @if (app()->environment('production'))
         @php
+            // Read manifest.json file to get compiled JS and CSS file paths
             $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
         @endphp
-
+        <!-- Include compiled JS file in production -->
         <script type="module" src="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}"></script>
-        <link rel="stylesheet" href="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}">
+        <!-- Include compiled CSS file in production -->
+        <link rel="stylesheet" href="{{ asset('build/' . $manifest['resources/css/app.css']['file']) }}">
     @else
+        <!-- Use Vite for development -->
         @vite(['resources/js/app.js'])
     @endif
+
 </body>
 
 </html>

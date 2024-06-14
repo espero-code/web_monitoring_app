@@ -17,9 +17,11 @@ body {
 /* Set the height of the header */
 header {
     height: 80px;
-    color: white; /* Ensure text is visible against background */
+    color: white;
+    /* Ensure text is visible against background */
     display: flex;
-    align-items: center; /* Center items vertically */
+    align-items: center;
+    /* Center items vertically */
 }
 
 /* Add a text shadow effect to header headings for better visibility */
@@ -31,9 +33,12 @@ header h2 {
 
 /* Limit overflow and adjust height if necessary */
 .page-content {
-    overflow: hidden; /* Overflow behavior */
-    /* height: calc(100vh - 80px); */ /* Uncomment if needed */
-    /* overflow-y: auto; */ /* Uncomment if needed */
+    overflow: hidden;
+    /* Overflow behavior */
+    /* height: calc(100vh - 80px); */
+    /* Uncomment if needed */
+    /* overflow-y: auto; */
+    /* Uncomment if needed */
 }
 
 /* Flex Utility Classes */
@@ -67,7 +72,7 @@ header h2 {
 
 /* Set a fixed width for the notification icon */
 #notification-icon {
-    width: 100px;
+    /* width: 100px; */
 }
 
 /* Adjust icon size */
@@ -81,7 +86,8 @@ header i {
 #notification-list {
     max-height: 30vh;
     width: 300px;
-    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
 }
 
 /* Adjust badge position */
@@ -93,8 +99,10 @@ header i {
 
 /* Override default link styles */
 a {
-    color: inherit; /* Inherit text color */
-    text-decoration: none; /* Remove underline */
+    color: inherit;
+    /* Inherit text color */
+    text-decoration: none;
+    /* Remove underline */
 }
 
 /* Status Indicator Styles */
@@ -121,9 +129,10 @@ a {
 /* Table Zone Styles */
 
 /* Limit height and enable vertical scrolling */
-.col-md-6 > .table-zone {
+.col-md-6>.table-zone {
     max-height: calc(100vh - 400px);
-    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
 }
 
 /* Table Cell Styles */
@@ -135,12 +144,33 @@ table td {
     text-align: center;
 }
 
+@keyframes highlight {
+    0% {
+        background-color: transparent;
+    }
+    100% {
+        background-color: orange;
+    }
+}
+
+tr.current {
+    border: 2px solid var(--bs-primary);
+    animation: highlight 1s ease-in-out forwards;
+}
+
+tr.current th,
+tr.current td {
+    border: none;
+
+}
+
 /* Footer Styles */
 
 /* Set the height of the footer */
 footer {
     height: 80px;
-    z-index: 9999; /* Ensure footer is on top */
+    z-index: 9999;
+    /* Ensure footer is on top */
 }
 
 /* Scrollbar Styles */
@@ -176,7 +206,8 @@ footer {
 #notification-container {
     right: 50px;
     max-height: 30vh;
-    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
     background-color: white;
     padding: 10px;
 }
@@ -188,4 +219,37 @@ footer {
     width: 350px;
     display: flex;
     justify-content: space-between;
+}
+
+.gradient {
+    background-color: var(--bs-primary);
+    background-image: radial-gradient(circle, hsl(209, 82%, 58%) 0%, hsl(211, 81%, 64%) 50%, hsl(210, 83%, 67%) 100%);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+#chart-container {
+    width: 100%; /* Largeur maximale pour s'adapter à la grille Bootstrap */
+    height: 400px; /* Hauteur fixe du graphique */
+    margin-bottom: 20px; /* Marge inférieure pour l'espace */
+}
+
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin: 0.5rem 0;
+    transition: background 0.3s ease;
+color: white;
+}
+.feature-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+.feature-item i {
+    font-size: 1.5rem;
+    margin-right: 1rem;
 }

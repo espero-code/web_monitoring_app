@@ -1,5 +1,23 @@
 version: '3.9'
 services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: laravel-app
+        volumes:
+            - './:/var/www/html'
+        ports:
+            - '80:80'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+            APACHE_DOCUMENT_ROOT: /var/www/html/public
+            APACHE_RUN_USER: www-data
+            APACHE_RUN_GROUP: www-data
+        depends_on:
+            - mysql
+        networks:
+            - laravel_network
     mysql:
         image: 'mysql:8.0'
         container_name: mysql-db

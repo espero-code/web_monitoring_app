@@ -18,10 +18,18 @@ class HomeController extends BaseController
      * @param string|null $slug
      * @return \Illuminate\View\View
      */
-    public function index($slug = null)
+    public function module($slug = null)
     {
         $data = $this->fetchModuleData($slug, 5);
-        return view('home/index', $data);
+        return view('home/module', $data);
+    }
+    /**
+     * Display the home page.
+     * @return \Illuminate\View\View
+     */
+    public function welcome()
+    {
+        return view('home/index');
     }
 
     /**
@@ -30,7 +38,7 @@ class HomeController extends BaseController
      * @param string|null $slug
      * @return \Illuminate\Http\JsonResponse
      */
-    public function get_module_datas($slug = null)
+    public function getAllModuleData($slug = null)
     {
         $data = $this->fetchModuleData($slug, 5);
         return response()->json($data);
@@ -75,7 +83,7 @@ class HomeController extends BaseController
 
         // Loop through the data to extract labels and values
         foreach ($datas as $data) {
-            array_unshift($labels, $data->created_at->diffForHumans());
+            array_unshift($labels, $data->created_at);
             array_unshift($values, $data->measured_value);
         }
 
@@ -91,5 +99,5 @@ class HomeController extends BaseController
             'totalPerPage' => $totalPerPage,
         ];
     }
-    
+
 }
